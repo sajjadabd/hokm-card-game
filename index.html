@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="./css/style.css" />
+    <title>Card Game</title>
+</head>
+<body>
+    <div class="myInput">
+        <input type="text" id="number" value="14"/>
+        <select id="shapes">
+            <option value="spades">spades</option>
+            <option value="clubs">clubs</option>
+            <option value="hearts">hearts</option>
+            <option value="diams">diams</option>
+        </select>
+        <button id="add">Add Card</button>
+        <button id="addRandom">Add Random</button>
+        <button id="drawCards">Draw Cards</button>
+    </div>
+
+    <div class="wrapper" id="myWrapper">
+        <div class="yourContainer">
+            <div class="container" id="myContainer">
+            
+            </div>
+            <div class="hokmContainer">
+                <span class="spades large cursor hokm" id="hokm_spades">&spades;</span>
+                <span class="hearts large cursor hokm" id="hokm_hearts">&hearts;</span>
+                <span class="clubs large cursor hokm" id="hokm_clubs">&clubs;</span>
+                <span class="diams large cursor hokm" id="hokm_diams">&diams;</span>
+            </div>
+            <div class="hokmDetails">
+                <span id="hokm_me"></span>
+                <span id="taj_me">&#128081;</span>
+            </div>
+        </div>
+        
+        <div class="playerFront">
+            <div class="boxControllerForTop"  id="topContainer">
+
+            </div>
+            <div class="hokmDetailsForOthers">
+                <span id="hokm_top"></span>
+                <span id="taj_top">&#128081;</span>
+            </div>
+        </div>
+
+        <div class="playerRight">
+            <div class="boxControllerForRight" id="rightContainer">
+    
+            </div>
+            <div class="hokmDetailsForOthers">
+                <span id="hokm_right"></span>
+                <span id="taj_right">&#128081;</span>
+            </div>
+        </div>
+
+        <div class="playerLeft">
+            <div class="boxControllerForLeft" id="leftContainer">
+    
+            </div>
+            <div class="hokmDetailsForOthers">
+                <span id="hokm_left"></span>
+                <span id="taj_left">&#128081;</span>
+            </div>
+        </div>
+        
+        <div class="centerCard">
+            <div class="greenBack">
+                <div class="insideGreen">
+                    <div class="insideSpades">
+                        <span>&spades;</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="gameBoard">
+            <div class="top" id="top">
+                
+            </div>
+            <div class="down" id="down">
+                
+            </div>
+            <div class="right" id="right">
+                
+            </div>
+            <div class="left" id="left">
+                
+            </div>
+        </div>
+    </div>
+    
+    <script src="./jQueryCDN/jquery-3.4.1.min.js"></script>
+    <script src="./js/code.js"></script>
+</body>
+</html>

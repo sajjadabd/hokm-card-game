@@ -1,0 +1,557 @@
+@font-face {
+  font-family: RobotoThin;
+  src: url(../fonts/Roboto-Thin.ttf);
+}
+
+@font-face {
+  font-family: RobotoBold;
+  src: url(../fonts/Roboto-Bold.ttf);
+}
+
+.spades , .clubs {
+	font-size : 1.5em;
+	color : black;
+}
+
+.hearts , .diams {
+	font-size : 1.5em;
+	color : red;
+}
+
+
+.spades-small , .clubs-small {
+	font-size : 0.9em;
+}
+
+.hearts-small , .diams-small {
+	font-size : 0.9em;
+	color : red;
+}
+
+body {
+	display : flex;
+	flex-direction : column;
+	overflow : hidden;
+	height : 95vh;
+}
+
+div.myInput {
+	text-align : center;
+}
+
+div.wrapper {
+	display : flex;
+	position : relative;
+	width : 100%;
+	height : 100%;
+	border : 1px solid blue;
+}
+
+div.container {
+	display : flex;
+	margin : auto;
+	width : 300px;
+	flex-direction : row;
+	position : absolute;
+	bottom : 0;
+	left : 50%;
+	transform : translateX(-50%);
+	border : 1px solid red;
+}
+
+div.playerFront {
+	display : flex;
+	flex-direction : row;
+	position : absolute;
+	margin : auto;
+	width : 300px;
+	top : 0px;
+	left : 35%;
+	transform : translateX(-50%);
+	border : 1px solid black;
+	transform : rotate(180deg);
+}
+
+div.playerRight {
+	display : flex;
+	flex-direction : row;
+	position : absolute;
+	margin : auto;
+	width : 300px;
+	right : -90px;
+	bottom : 50%;
+	transform : translateY(-50%);
+	border : 1px solid black;
+	transform : rotate(-90deg);
+}
+
+div.playerLeft {
+	display : flex;
+	flex-direction : row;
+	position : absolute;
+	margin : auto;
+	width : 300px;
+	left : -90px;
+	top : 60%;
+	transform : translateY(-50%);
+	border : 1px solid black;
+	transform : rotate(90deg);
+}
+
+div.boxControllerForTop {
+	display : flex;
+	flex-direction : row;
+	position : absolute;
+	margin : auto;
+	width : 300px;
+	bottom : 0%;
+	right : 0%;
+	border : 1px solid red;
+}
+
+
+div.boxControllerForRight {
+	display : flex;
+	flex-direction : row;
+	position : absolute;
+	margin : auto;
+	width : 300px;
+	bottom : 0;
+	right : 0%;
+	border : 1px solid red;
+}
+
+div.boxControllerForLeft {
+	display : flex;
+	flex-direction : row;
+	position : absolute;
+	margin : auto;
+	width : 300px;
+	bottom : 0;
+	right : 0%;
+	border : 1px solid red;
+}
+
+
+
+
+
+
+div.cardContainer {
+	display : inline-block;
+}
+
+div.card {
+	transform: scale(1.2); /* Equal to scaleX(0.7) scaleY(0.7) */
+	background-color : white;
+	position : relative;
+	display : flex;
+	flex-direction : column;
+	width : 90px;
+	height : 130px;
+	border : 1px solid black;
+	border-radius : 10px;
+	justify-content : center;
+	align-items : center;
+	-webkit-user-select: none;  /* Chrome all / Safari all */
+	-moz-user-select: none;     /* Firefox all */
+	-ms-user-select: none;      /* IE 10+ */
+	user-select: none;          /* Likely future */ 
+	cursor : pointer;
+}
+
+
+div.otherCard {
+	transform: scale(0.6); /* Equal to scaleX(0.7) scaleY(0.7) */
+	background-color : white;
+	position : relative;
+	display : flex;
+	flex-direction : column;
+	width : 90px;
+	height : 130px;
+	border : 1px solid black;
+	border-radius : 10px;
+	justify-content : center;
+	align-items : center;
+	-webkit-user-select: none;  /* Chrome all / Safari all */
+	-moz-user-select: none;     /* Firefox all */
+	-ms-user-select: none;      /* IE 10+ */
+	user-select: none;          /* Likely future */ 
+}
+
+/*
+div.card:nth-child(1) {
+	top : 0px;
+	left : 0px;
+}
+
+div.card:nth-child(2) {
+	top : 0px;
+	left : -60px;
+}
+
+div.card:nth-child(3) {
+	top : 0px;
+	left : -120px;
+}
+
+div.card:nth-child(4) {
+	top : 0px;
+	left : -180px;
+}
+
+div.card:hover{
+	top : -10px;
+}
+
+*/
+
+
+
+
+
+
+
+div.number {
+	position : absolute;
+	font-family : RobotoBold;
+	font-size : 16px;
+	top : 4px;
+	left : 4px;
+}
+
+div.number div:nth-child(2) {
+	margin-top : -5px;
+	text-align : center;
+}
+
+
+div.numberReverse {
+	position : absolute;
+	font-family : RobotoBold;
+	font-size : 16px;
+	bottom : 4px;
+	right : 4px;
+	transform : rotate(180deg);
+}
+
+div.numberReverse div:nth-child(2) {
+	margin-top : -5px;
+	text-align : center;
+}
+
+
+div.row {
+	display : flex;
+	flex-direction : row;
+	/*margin : auto;*/ /*Scary Code -- bad padding*/
+	width : 65%;
+	/*justify-content : center;
+	align-items : center;*/
+}
+
+div.col {
+	display : flex;
+	flex-direction : column;
+	align-items : center;
+	justify-content : space-around;
+}
+
+div.col-taller {
+	display : flex;
+	flex-direction : column;
+	align-items : center;
+	height : 130%;
+	justify-content : space-around;
+}
+
+div.col-very-taller {
+	display : flex;
+	flex-direction : column;
+	align-items : center;
+	height : 190%;
+	justify-content : space-around;
+}
+
+
+div.col-medium {
+	display : flex;
+	flex-direction : column;
+	height : 100%;
+	align-items : center;
+	justify-content : space-around;
+}
+
+div.rowOfColumns {
+	display : flex;
+	flex-direction : row;
+	width : 70%;
+	justify-content : center;
+	align-items : center;
+}
+
+div.rowOfColumnsSpaceAround {
+	display : flex;
+	flex-direction : row;
+	width : 70%;
+	justify-content : space-around;
+}
+
+
+div.card div.seperate {
+	position : absolute ;
+	top : 50%;
+	left : 50%;
+	transform : translate(-50%,-50%);
+}
+
+div.row span {
+	width : 30px;
+	padding-right : 6px;
+}
+
+
+span.hidden {
+	visibility : hidden;
+}
+
+span.large {
+	font-size : 3em;
+}
+
+img {
+	width : 90%;
+	border : 1px solid black;
+}
+
+
+
+div.yourContainer {
+	position : absolute ;
+	bottom : 0;
+	left : 50%;
+	transform : translateX(-50%);
+	width : 300px;
+	height : auto;
+	border : 1px solid aqua;
+}
+
+
+div.hokmContainer{
+	display : none;
+	flex-direction : row;
+	justify-content: space-between;
+	position : relative;
+	width : 200px;
+	height : 50px;
+	bottom : 170px;
+	left : 50%;
+	transform : translateX(-50%);
+}
+
+
+span.cursor {
+	-webkit-user-select: none;  /* Chrome all / Safari all */
+	-moz-user-select: none;     /* Firefox all */
+	-ms-user-select: none;      /* IE 10+ */
+	user-select: none;          /* Likely future */ 
+	cursor : pointer;
+	transition : 0.1s;
+}
+
+/*
+span.cursor:nth-child(1) {
+	left : 0;
+	transform : translateX(-50%);
+}
+
+span.cursor:nth-child(2) {
+	left : 25%;
+	transform : translateX(-50%);
+}
+
+span.cursor:nth-child(3) {
+	left : 50%;
+	transform : translateX(-50%);
+}
+
+span.cursor:nth-child(4) {
+	left : 75%;
+	transform : translateX(-50%);
+}
+*/
+
+span.cursor:hover {
+	position : relative;
+	bottom : 5px;
+	transition : 0.1s;
+}
+
+
+
+div.hokmDetails {
+	font-size : 3em;
+	display : flex;
+	display : none;
+	flex-direction : row;
+	justify-content: space-between;
+	position : absolute;
+	width : 100px;
+	height : 50px;
+	bottom : 170px;
+	right : -100px;
+	border : 1px solid black;
+	-webkit-user-select: none;  /* Chrome all / Safari all */
+	-moz-user-select: none;     /* Firefox all */
+	-ms-user-select: none;      /* IE 10+ */
+	user-select: none;          /* Likely future */ 
+}
+
+
+div.hokmDetailsForOthers {
+	font-size : 2em;
+	visibility: hidden;
+	display : flex;
+	flex-direction : row;
+	justify-content: space-between;
+	position : absolute;
+	width : 60px;
+	height : 50px;
+	bottom : 100px;
+	right : 0px;
+	border : 1px solid black;
+	-webkit-user-select: none;  /* Chrome all / Safari all */
+	-moz-user-select: none;     /* Firefox all */
+	-ms-user-select: none;      /* IE 10+ */
+	user-select: none;          /* Likely future */ 
+}
+
+
+div.centerCard {
+	transform: scale(0.7); /* Equal to scaleX(0.7) scaleY(0.7) */
+	visibility: hidden;
+	background-color : white;
+	position : relative;
+	display : flex;
+	margin : auto;
+	flex-direction : column;
+	width : 90px;
+	height : 130px;
+	border : 1px solid black;
+	border-radius : 10px;
+	justify-content : center;
+	align-items : center;
+	-webkit-user-select: none;  /* Chrome all / Safari all */
+	-moz-user-select: none;     /* Firefox all */
+	-ms-user-select: none;      /* IE 10+ */
+	user-select: none;          /* Likely future */ 
+}
+
+div.greenBack {
+	margin : 5px;
+	background-color : green;
+	border : 2px solid white;
+	width : 78px;
+	height : 100%;
+}
+
+div.insideGreen {
+	margin : 5px;
+	background-color : green;
+	border : 2px solid white;
+	width : 65px;
+	height : 88%;
+	display : flex;
+	flex-direction : column;
+	justify-content : space-evenly;
+	align-items : center;
+	font-size : 2em;
+}
+
+div.insideGreen div {
+	display : flex;
+	position : relative;
+	margin : auto;
+	justify-content : center;
+	align-items : center;
+	width : 30px;
+	height : 30px;
+	border : 2px solid white;
+	border-radius : 50%;
+}
+
+div.insideGreen div span {
+	position : relative;
+	bottom : 3px;
+}
+
+div.insideGreen div:nth-child(2) {
+	transform : rotate(180deg);
+}
+
+div.insideSpades {
+	color : white;
+}
+
+div.gameBoard {
+	display : flex;
+	display : none;
+	margin : auto;
+	position : absolute;
+	top : 50%;
+	left :  50%;
+	transform : translate(-50%,-50%);
+	width : 200px;
+	height : 200px;
+}
+
+div.top , div.down, div.right , div.left {
+	transform: scale(0.7); /* Equal to scaleX(0.7) scaleY(0.7) */
+	visibility: visible;
+	background-color : white;
+	display : flex;
+	margin : auto;
+	flex-direction : column;
+	width : 90px;
+	height : 130px;
+
+	border-radius : 10px;
+	justify-content : center;
+	align-items : center;
+	-webkit-user-select: none;  /* Chrome all / Safari all */
+	-moz-user-select: none;     /* Firefox all */
+	-ms-user-select: none;      /* IE 10+ */
+	user-select: none;          /* Likely future */ 
+}
+
+
+div.top {
+	position : absolute;
+	top : 25%;
+	left : 50%;
+	transform : translate(-50%,-50%) scale(0.7);
+}
+
+div.down {
+	position : absolute;
+	top : 75%;
+	left : 50%;
+	transform : translate(-50%,-50%) scale(0.7);
+} 
+
+div.left {
+	position : absolute;
+	top : 50%;
+	left : 30%;
+	transform : translate(-50%,-50%) scale(0.7);
+}
+
+div.right {
+	position : absolute;
+	top : 50%;
+	left : 70%;
+	transform : translate(-50%,-50%) scale(0.7);
+} 
+
+
+

@@ -40,6 +40,7 @@ body {
 
 div.myInput {
 	text-align : center;
+	/* visibility : hidden; */
 }
 
 div.myInput * {

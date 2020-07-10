@@ -1,5 +1,18 @@
 $(document).ready(function(){
 
+
+	class Board {
+		constructor() {
+			this.top = "";
+			this.down = "";
+			this.left = "";
+			this.right = "";
+		}
+	}
+
+	let board = new Board();
+
+
 	class Person {
 		constructor(name,cards) {
 			this.name = name;
@@ -8,6 +21,23 @@ $(document).ready(function(){
 			this.cardGoToLeft = 0;
 			this.popCounter = 12;
 			this.width = 300;
+		}
+
+
+		removeFromCards = (whichPlayer) => {
+			console.log(`.player_${whichPlayer}`);
+			let cards = $(`.player_${whichPlayer}`).last();
+			
+			if( whichPlayer == 1 ) {
+				document.getElementById("right").innerHTML = cards.html();
+			} else if ( whichPlayer == 2 ) {
+				document.getElementById("top").innerHTML = cards.html();
+			} else if ( whichPlayer == 3 ) {
+				document.getElementById("left").innerHTML = cards.html();
+			}
+
+			cards.remove();
+			console.log(cards);
 		}
 
 		sortMyDeckOfCards() {
@@ -52,6 +82,8 @@ $(document).ready(function(){
 			console.log(this.cards);
 		}
 	}
+
+
 	
 	class Game {
 		constructor() {
@@ -130,6 +162,7 @@ $(document).ready(function(){
 		game.players[i] = new Person(i,[]); // Person(name,cards);
 	}
 
+	
 
 	document.addEventListener("keypress", (e) => {
 		//console.log(e.keyCode);
@@ -149,8 +182,10 @@ $(document).ready(function(){
 	//console.log(deckOfCards.deck);
 	
 	
-	game.drawCards(deckOfCards.deck);
+	game.drawCards(deckOfCards.deck); // divide cards between players
 	game.printPeopleCards();
+
+	console.log(game);
 	
 
 	let playerFront = document.getElementById("topContainer");
@@ -552,7 +587,7 @@ $(document).ready(function(){
 
 			cardHTML = `
 			<div class="cardContainer" >
-				<div id="${number}_${shape}" class=" ${whichPlayer == 0 ? `card` : `otherCard`}" style="top : 0px;
+				<div class=" ${whichPlayer == 0 ? `card` : `otherCard player_${whichPlayer}`}" style="top : 0px;
 					left : ${game.players[whichPlayer].cardGoToLeft}px;">
 					<div class="greenBack">
 						<div class="insideGreen">
@@ -894,6 +929,18 @@ $(document).ready(function(){
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
 	let addCard = document.getElementById("add");
 
 	let verifyNumberAndShape = (number, shape) => {
@@ -928,24 +975,25 @@ $(document).ready(function(){
 		} else {
 			console.log("Error Happens");
 		}
+
 	}
 
-	let right;
+	//let right;
 
 	changeWidthBasedOnNumberOfCards = (whichPlayer) => {
 		if(whichPlayer == 0) {
 			if( game.players[whichPlayer].counter <= 5 ) {
 				game.players[whichPlayer].width = 300;
-				right = -85;
-				left = -85;
+				//right = -85;
+				//left = -85;
 			} else if( game.players[whichPlayer].counter == 9 ) {
 				game.players[whichPlayer].width = 360;
-				right = -115;
-				left = -115;
+				//right = -115;
+				//left = -115;
 			} else if( game.players[whichPlayer].counter == 13 ) {
 				game.players[whichPlayer].width = 460;
-				right = -165;
-				left = -165;
+				//right = -165;
+				//left = -165;
 			}
 		} else {
 			if( game.players[whichPlayer].counter <= 5 ) {
@@ -1090,19 +1138,21 @@ $(document).ready(function(){
 						changeWidthBasedOnNumberOfCards(player);
 						
 						if(game.players[player].popCounter == -1) {
-							
-							sortDeckOfCardsOfPlayer(player);
-							
+							sortDeckOfCardsOfPlayer(player)
 						}
+						
 					} 
 				}
 			}
 		}
 	});
 
+	let yourTurn = true;
 
 	$(document).on('mouseover','div.card',function(){
-		$(this).css("top", "-10px");
+		if(yourTurn == true) {
+			$(this).css("top", "-10px");
+		}
 	});
 
 	$(document).on('mouseleave','div.card',function(){
@@ -1150,7 +1200,11 @@ $(document).ready(function(){
 
 	$(document).on('click','div.card',function(){
 
-		let z_index = 2;
+		if( yourTurn == false ) {
+			return;
+		}
+
+		//let z_index = 2;
 
 		//$(this).children().css("left","0px");
 		//$(this).children().css("z-index",z_index);
@@ -1160,10 +1214,13 @@ $(document).ready(function(){
 		console.log(id);
 
 		let cutText = document.getElementById(id).innerHTML;
-		console.log(cutText);
+		//console.log(cutText);
 
-		document.getElementById("down").style.zIndex = z_index;
+		//document.getElementById("down").style.zIndex = z_index;
 		document.getElementById("down").innerHTML = cutText;
+		//document.getElementById("top").innerHTML = cutText;
+		//document.getElementById("right").innerHTML = cutText;
+		//document.getElementById("left").innerHTML = cutText;
 
 		document.getElementById(id).remove();
 		game.players[0].counter--;
@@ -1171,6 +1228,8 @@ $(document).ready(function(){
 
 		let compareID = id.replace("_", " ");
 		//console.log(compareID);
+		board.down = compareID;
+		console.log(board);
 
 		game.players[0].cards = game.players[0].cards.filter( (value) => {
 			return value != compareID;
@@ -1178,6 +1237,8 @@ $(document).ready(function(){
 
 		console.log(game.players[0].cards);
 
+
+		// adjust all cards in myContainer and set all left px with correct value
 		game.players[0].cardGoToLeft = 0;
 		var myCardList = document.querySelectorAll("div#myContainer div.cardContainer div.card");
 
@@ -1186,19 +1247,20 @@ $(document).ready(function(){
 			myCardList[i].style.left = game.players[0].cardGoToLeft + "px";
 			game.players[0].cardGoToLeft -= 60;
 		}
+		//-----------------------------------------
+
+		//yourTurn = false;
+
+		/*
+		here other players should act
+		*/
+		game.players[1].removeFromCards(1);
+		game.players[1].removeFromCards(2);
+		game.players[1].removeFromCards(3);
 	});
 
 	
 
-	/*
-	$(document).on('mouseover','div.otherCard',function(){
-		$(this).css("top", "-10px")
-	});
-
-	$(document).on('mouseleave','div.otherCard',function(){
-		$(this).css("top", "0px")
-	});
-	*/
 
 });
 

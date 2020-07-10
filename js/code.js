@@ -159,8 +159,8 @@ $(document).ready(function(){
 
 	let select_hokm = false;
 
-	let shape = "spades";
-	let number = 14 ;
+	let shape = "hearts";
+	let number = 9 ;
 
 	let card = document.getElementById("theCard");
 
@@ -169,7 +169,7 @@ $(document).ready(function(){
 	input.addEventListener('input', (e) => {
 		number = e.target.value;
 
-		//drawCard(number, shape);
+		drawSeperateCard(number, shape);
 	});
 
 	let select = document.getElementById("shapes");
@@ -178,7 +178,7 @@ $(document).ready(function(){
 	select.addEventListener('change' , (e) => {
 		shape = e.target.value;
 
-		//drawCard(number, shape);
+		drawSeperateCard(number, shape);
 	});
 
 
@@ -186,8 +186,8 @@ $(document).ready(function(){
 
 
 	let initialize = () => {
-		input.value = 14;
-		select.value = "spades";
+		input.value = 9;
+		select.value = "hearts";
 	}
 
 	initialize();
@@ -202,33 +202,9 @@ $(document).ready(function(){
 
 	let cardHTML = ``;
 
-	let drawCard = (number, shape , whichPlayer) => {
-		//console.log(number + "  " + shape);
 
-		if(whichPlayer != 0) {
-
-			cardHTML = `
-			<div class="cardContainer" id="${number}_${shape}">
-				<div class=" ${whichPlayer == 0 ? `card` : `otherCard`}" style="top : 0px;
-					left : ${game.players[whichPlayer].cardGoToLeft}px;">
-					<div class="greenBack">
-						<div class="insideGreen">
-							<div class="insideSpades">
-								<span>&spades;</span>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-			`;
-			
-			return;
-		}
-
-		cardHTML = `
-		<div class="cardContainer" id="${number}_${shape}">
-		<div class=" ${whichPlayer == 0 ? `card` : `otherCard`}" style="top : 0px;
-		left : ${game.players[whichPlayer].cardGoToLeft}px;">`;
+	let drawSeperateCard = (number, shape) => {
+		cardHTML = `<div>`;
 
 		if(number == 11 ) {
 			cardHTML += `
@@ -292,7 +268,7 @@ $(document).ready(function(){
 		if ( number == 2 ) {
 			cardHTML += `
 			<div class="rowOfColumns">
-				<div class="col-taller">
+				<div class="col">
 					<span class="${shape == "hearts" || shape == "diams" ? `hearts` : `spades`}">&${shape};</span>
 					<span class="${shape == "hearts" || shape == "diams" ? `hearts` : `spades`} hidden">&${shape};</span>
 					<span class="${shape == "hearts" || shape == "diams" ? `hearts` : `spades`}">&${shape};</span>
@@ -302,7 +278,7 @@ $(document).ready(function(){
 		} else if ( number == 3 ) {
 			cardHTML += `
 			<div class="rowOfColumns">
-				<div class="col-taller">
+				<div class="col">
 					<span class="${shape == "hearts" || shape == "diams" ? `hearts` : `spades`}">&${shape};</span>
 					<span class="${shape == "hearts" || shape == "diams" ? `hearts` : `spades`}">&${shape};</span>
 					<span class="${shape == "hearts" || shape == "diams" ? `hearts` : `spades`}">&${shape};</span>
@@ -312,15 +288,17 @@ $(document).ready(function(){
 		} else if ( number == 4 ) {
 			cardHTML += `
 			<div class="rowOfColumns">
-				<div class="col-very-taller">
+				<div class="col">
 					<span class="${shape == "hearts" || shape == "diams" ? `hearts` : `spades`}">&${shape};</span>
+					<span class="${shape == "hearts" || shape == "diams" ? `hearts` : `spades`} hidden">&${shape};</span>
 					<span class="${shape == "hearts" || shape == "diams" ? `hearts` : `spades`}">&${shape};</span>
 				</div>
 				<div class="col">
 					<span class="${shape == "hearts" || shape == "diams" ? `hearts` : `spades`} hidden">&${shape};</span>
 				</div>
-				<div class="col-very-taller">
+				<div class="col">
 					<span class="${shape == "hearts" || shape == "diams" ? `hearts` : `spades`}">&${shape};</span>
+					<span class="${shape == "hearts" || shape == "diams" ? `hearts` : `spades`} hidden">&${shape};</span>
 					<span class="${shape == "hearts" || shape == "diams" ? `hearts` : `spades`}">&${shape};</span>
 				</div>
 			</div>
@@ -328,15 +306,17 @@ $(document).ready(function(){
 		} else if ( number == 5 ) {
 			cardHTML += `
 			<div class="rowOfColumns">
-				<div class="col-very-taller">
+				<div class="col">
 					<span class="${shape == "hearts" || shape == "diams" ? `hearts` : `spades`}">&${shape};</span>
+					<span class="${shape == "hearts" || shape == "diams" ? `hearts` : `spades`} hidden">&${shape};</span>
 					<span class="${shape == "hearts" || shape == "diams" ? `hearts` : `spades`}">&${shape};</span>
 				</div>
 				<div class="col">
 					<span class="${shape == "hearts" || shape == "diams" ? `hearts` : `spades`}">&${shape};</span>
 				</div>
-				<div class="col-very-taller">
+				<div class="col">
 					<span class="${shape == "hearts" || shape == "diams" ? `hearts` : `spades`}">&${shape};</span>
+					<span class="${shape == "hearts" || shape == "diams" ? `hearts` : `spades`} hidden">&${shape};</span>
 					<span class="${shape == "hearts" || shape == "diams" ? `hearts` : `spades`}">&${shape};</span>
 				</div>
 			</div>
@@ -344,7 +324,7 @@ $(document).ready(function(){
 		} else if ( number == 6 ) {
 			cardHTML += `
 			<div class="rowOfColumns">
-				<div class="col-taller">
+				<div class="col">
 					<span class="${shape == "hearts" || shape == "diams" ? `hearts` : `spades`}">&${shape};</span>
 					<span class="${shape == "hearts" || shape == "diams" ? `hearts` : `spades`}">&${shape};</span>
 					<span class="${shape == "hearts" || shape == "diams" ? `hearts` : `spades`}">&${shape};</span>
@@ -353,7 +333,7 @@ $(document).ready(function(){
 					<span class="${shape == "hearts" || shape == "diams" ? `hearts` : `spades`} hidden">&${shape};</span>
 					<span class="${shape == "hearts" || shape == "diams" ? `hearts` : `spades`} hidden">&${shape};</span>
 				</div>
-				<div class="col-taller">
+				<div class="col">
 					<span class="${shape == "hearts" || shape == "diams" ? `hearts` : `spades`}">&${shape};</span>
 					<span class="${shape == "hearts" || shape == "diams" ? `hearts` : `spades`}">&${shape};</span>
 					<span class="${shape == "hearts" || shape == "diams" ? `hearts` : `spades`}">&${shape};</span>
@@ -363,7 +343,7 @@ $(document).ready(function(){
 		} else if ( number == 7 ) {
 			cardHTML += `
 			<div class="rowOfColumns">
-				<div class="col-taller">
+				<div class="col">
 					<span class="${shape == "hearts" || shape == "diams" ? `hearts` : `spades`}">&${shape};</span>
 					<span class="${shape == "hearts" || shape == "diams" ? `hearts` : `spades`}">&${shape};</span>
 					<span class="${shape == "hearts" || shape == "diams" ? `hearts` : `spades`}">&${shape};</span>
@@ -372,7 +352,7 @@ $(document).ready(function(){
 					<span class="${shape == "hearts" || shape == "diams" ? `hearts` : `spades`}">&${shape};</span>
 					<span class="${shape == "hearts" || shape == "diams" ? `hearts` : `spades`} hidden">&${shape};</span>
 				</div>
-				<div class="col-taller">
+				<div class="col">
 					<span class="${shape == "hearts" || shape == "diams" ? `hearts` : `spades`}">&${shape};</span>
 					<span class="${shape == "hearts" || shape == "diams" ? `hearts` : `spades`}">&${shape};</span>
 					<span class="${shape == "hearts" || shape == "diams" ? `hearts` : `spades`}">&${shape};</span>
@@ -382,7 +362,7 @@ $(document).ready(function(){
 		} else if ( number == 8 ) {
 			cardHTML += `
 			<div class="rowOfColumns">
-				<div class="col-taller">
+				<div class="col">
 					<span class="${shape == "hearts" || shape == "diams" ? `hearts` : `spades`}">&${shape};</span>
 					<span class="${shape == "hearts" || shape == "diams" ? `hearts` : `spades`}">&${shape};</span>
 					<span class="${shape == "hearts" || shape == "diams" ? `hearts` : `spades`}">&${shape};</span>
@@ -391,7 +371,7 @@ $(document).ready(function(){
 					<span class="${shape == "hearts" || shape == "diams" ? `hearts` : `spades`}">&${shape};</span>
 					<span class="${shape == "hearts" || shape == "diams" ? `hearts` : `spades`}">&${shape};</span>
 				</div>
-				<div class="col-taller">
+				<div class="col">
 					<span class="${shape == "hearts" || shape == "diams" ? `hearts` : `spades`}">&${shape};</span>
 					<span class="${shape == "hearts" || shape == "diams" ? `hearts` : `spades`}">&${shape};</span>
 					<span class="${shape == "hearts" || shape == "diams" ? `hearts` : `spades`}">&${shape};</span>
@@ -401,7 +381,7 @@ $(document).ready(function(){
 		} else if ( number == 9 ) {
 			cardHTML += `
 			<div class="rowOfColumns">
-				<div class="col">
+				<div class="col-smaller">
 					<span class="${shape == "hearts" || shape == "diams" ? `hearts` : `spades`}">&${shape};</span>
 					<span class="${shape == "hearts" || shape == "diams" ? `hearts` : `spades`}">&${shape};</span>
 					<span class="${shape == "hearts" || shape == "diams" ? `hearts` : `spades`}">&${shape};</span>
@@ -410,7 +390,7 @@ $(document).ready(function(){
 				<div class="col">
 					<span class="${shape == "hearts" || shape == "diams" ? `hearts` : `spades`}">&${shape};</span>
 				</div>
-				<div class="col">
+				<div class="col-smaller">
 					<span class="${shape == "hearts" || shape == "diams" ? `hearts` : `spades`}">&${shape};</span>
 					<span class="${shape == "hearts" || shape == "diams" ? `hearts` : `spades`}">&${shape};</span>
 					<span class="${shape == "hearts" || shape == "diams" ? `hearts` : `spades`}">&${shape};</span>
@@ -421,17 +401,18 @@ $(document).ready(function(){
 		} else if ( number == 10 ) {
 			cardHTML += `
 			<div class="rowOfColumns">
-				<div class="col">
+				<div class="col-smaller">
 					<span class="${shape == "hearts" || shape == "diams" ? `hearts` : `spades`}">&${shape};</span>
 					<span class="${shape == "hearts" || shape == "diams" ? `hearts` : `spades`}">&${shape};</span>
 					<span class="${shape == "hearts" || shape == "diams" ? `hearts` : `spades`}">&${shape};</span>
 					<span class="${shape == "hearts" || shape == "diams" ? `hearts` : `spades`}">&${shape};</span>
 				</div>
-				<div class="col-medium">
+				<div class="col">
 					<span class="${shape == "hearts" || shape == "diams" ? `hearts` : `spades`}">&${shape};</span>
+					<span class="${shape == "hearts" || shape == "diams" ? `hearts` : `spades`} hidden">&${shape};</span>
 					<span class="${shape == "hearts" || shape == "diams" ? `hearts` : `spades`}">&${shape};</span>
 				</div>
-				<div class="col">
+				<div class="col-smaller">
 					<span class="${shape == "hearts" || shape == "diams" ? `hearts` : `spades`}">&${shape};</span>
 					<span class="${shape == "hearts" || shape == "diams" ? `hearts` : `spades`}">&${shape};</span>
 					<span class="${shape == "hearts" || shape == "diams" ? `hearts` : `spades`}">&${shape};</span>
@@ -520,7 +501,374 @@ $(document).ready(function(){
 		} else if( number == 14 ) {
 			cardHTML += `
 			<div class="rowOfColumns">
-				<div class="col-taller">
+				<div class="col">
+					<span class="${shape == "hearts" || shape == "diams" ? `hearts` : `spades`} large">&${shape};</span>
+				</div>
+			</div>
+			`;
+		}
+		
+		cardHTML += `</div>
+		</div>`;
+
+
+		let centerCard = document.getElementById('centerCard');
+		centerCard.innerHTML = cardHTML;
+	}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	let drawCard = (number, shape , whichPlayer) => {
+		//console.log(number + "  " + shape);
+
+		if(whichPlayer != 0) {
+
+			cardHTML = `
+			<div class="cardContainer" >
+				<div id="${number}_${shape}" class=" ${whichPlayer == 0 ? `card` : `otherCard`}" style="top : 0px;
+					left : ${game.players[whichPlayer].cardGoToLeft}px;">
+					<div class="greenBack">
+						<div class="insideGreen">
+							<div class="insideSpades">
+								<span>&spades;</span>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			`;
+			
+			return;
+		}
+
+		cardHTML = `
+		<div  class="cardContainer" >
+		<div id="${number}_${shape}" class=" ${whichPlayer == 0 ? `card` : `otherCard`}" style="top : 0px;
+		left : ${game.players[whichPlayer].cardGoToLeft}px;">`;
+
+		if(number == 11 ) {
+			cardHTML += `
+			<div class="number">
+				<div class="${shape == "hearts" || shape == "diams" ? `hearts-small` : `spades-small`}">J</div>
+				<div><span class="${shape == "hearts" || shape == "diams" ? `hearts-small` : `spades-small`}">&${shape};</span></div>
+			</div>
+			<div class="numberReverse">
+				<div class="${shape == "hearts" || shape == "diams" ? `hearts-small` : `spades-small`}">J</div>
+				<div><span class="${shape == "hearts" || shape == "diams" ? `hearts-small` : `spades-small`}">&${shape};</span></div>
+			</div>
+			`;
+		} else if(number == 12 ) {
+			cardHTML += `
+			<div class="number">
+				<div class="${shape == "hearts" || shape == "diams" ? `hearts-small` : `spades-small`}">Q</div>
+				<div><span class="${shape == "hearts" || shape == "diams" ? `hearts-small` : `spades-small`}">&${shape};</span></div>
+			</div>
+			<div class="numberReverse">
+				<div class="${shape == "hearts" || shape == "diams" ? `hearts-small` : `spades-small`}">Q</div>
+				<div><span class="${shape == "hearts" || shape == "diams" ? `hearts-small` : `spades-small`}">&${shape};</span></div>
+			</div>
+			`;
+		} else if(number == 13 ) {
+			cardHTML += `
+			<div class="number">
+				<div class="${shape == "hearts" || shape == "diams" ? `hearts-small` : `spades-small`}">K</div>
+				<div><span class="${shape == "hearts" || shape == "diams" ? `hearts-small` : `spades-small`}">&${shape};</span></div>
+			</div>
+			<div class="numberReverse">
+				<div class="${shape == "hearts" || shape == "diams" ? `hearts-small` : `spades-small`}">K</div>
+				<div><span class="${shape == "hearts" || shape == "diams" ? `hearts-small` : `spades-small`}">&${shape};</span></div>
+			</div>
+			`;
+		} else if(number == 14 ) {
+			cardHTML += `
+			<div class="number">
+				<div class="${shape == "hearts" || shape == "diams" ? `hearts-small` : `spades-small`}">A</div>
+				<div><span class="${shape == "hearts" || shape == "diams" ? `hearts-small` : `spades-small`}">&${shape};</span></div>
+			</div>
+			<div class="numberReverse">
+				<div class="${shape == "hearts" || shape == "diams" ? `hearts-small` : `spades-small`}">A</div>
+				<div><span class="${shape == "hearts" || shape == "diams" ? `hearts-small` : `spades-small`}">&${shape};</span></div>
+			</div>
+			`;
+		} else {
+			cardHTML += `
+			<div class="number">
+				<div class="${shape == "hearts" || shape == "diams" ? `hearts-small` : `spades-small`}">${number}</div>
+				<div><span class="${shape == "hearts" || shape == "diams" ? `hearts-small` : `spades-small`}">&${shape};</span></div>
+			</div>
+			<div class="numberReverse">
+				<div class="${shape == "hearts" || shape == "diams" ? `hearts-small` : `spades-small`}">${number}</div>
+				<div><span class="${shape == "hearts" || shape == "diams" ? `hearts-small` : `spades-small`}">&${shape};</span></div>
+			</div>
+			`;
+		}
+		
+
+
+		if ( number == 2 ) {
+			cardHTML += `
+			<div class="rowOfColumns">
+				<div class="col">
+					<span class="${shape == "hearts" || shape == "diams" ? `hearts` : `spades`}">&${shape};</span>
+					<span class="${shape == "hearts" || shape == "diams" ? `hearts` : `spades`} hidden">&${shape};</span>
+					<span class="${shape == "hearts" || shape == "diams" ? `hearts` : `spades`}">&${shape};</span>
+				</div>
+			</div>
+			`;
+		} else if ( number == 3 ) {
+			cardHTML += `
+			<div class="rowOfColumns">
+				<div class="col">
+					<span class="${shape == "hearts" || shape == "diams" ? `hearts` : `spades`}">&${shape};</span>
+					<span class="${shape == "hearts" || shape == "diams" ? `hearts` : `spades`}">&${shape};</span>
+					<span class="${shape == "hearts" || shape == "diams" ? `hearts` : `spades`}">&${shape};</span>
+				</div>
+			</div>
+			`;
+		} else if ( number == 4 ) {
+			cardHTML += `
+			<div class="rowOfColumns">
+				<div class="col">
+					<span class="${shape == "hearts" || shape == "diams" ? `hearts` : `spades`}">&${shape};</span>
+					<span class="${shape == "hearts" || shape == "diams" ? `hearts` : `spades`} hidden">&${shape};</span>
+					<span class="${shape == "hearts" || shape == "diams" ? `hearts` : `spades`}">&${shape};</span>
+				</div>
+				<div class="col">
+					<span class="${shape == "hearts" || shape == "diams" ? `hearts` : `spades`} hidden">&${shape};</span>
+				</div>
+				<div class="col">
+					<span class="${shape == "hearts" || shape == "diams" ? `hearts` : `spades`}">&${shape};</span>
+					<span class="${shape == "hearts" || shape == "diams" ? `hearts` : `spades`} hidden">&${shape};</span>
+					<span class="${shape == "hearts" || shape == "diams" ? `hearts` : `spades`}">&${shape};</span>
+				</div>
+			</div>
+			`;
+		} else if ( number == 5 ) {
+			cardHTML += `
+			<div class="rowOfColumns">
+				<div class="col">
+					<span class="${shape == "hearts" || shape == "diams" ? `hearts` : `spades`}">&${shape};</span>
+					<span class="${shape == "hearts" || shape == "diams" ? `hearts` : `spades`} hidden">&${shape};</span>
+					<span class="${shape == "hearts" || shape == "diams" ? `hearts` : `spades`}">&${shape};</span>
+				</div>
+				<div class="col">
+					<span class="${shape == "hearts" || shape == "diams" ? `hearts` : `spades`}">&${shape};</span>
+				</div>
+				<div class="col">
+					<span class="${shape == "hearts" || shape == "diams" ? `hearts` : `spades`}">&${shape};</span>
+					<span class="${shape == "hearts" || shape == "diams" ? `hearts` : `spades`} hidden">&${shape};</span>
+					<span class="${shape == "hearts" || shape == "diams" ? `hearts` : `spades`}">&${shape};</span>
+				</div>
+			</div>
+			`;
+		} else if ( number == 6 ) {
+			cardHTML += `
+			<div class="rowOfColumns">
+				<div class="col">
+					<span class="${shape == "hearts" || shape == "diams" ? `hearts` : `spades`}">&${shape};</span>
+					<span class="${shape == "hearts" || shape == "diams" ? `hearts` : `spades`}">&${shape};</span>
+					<span class="${shape == "hearts" || shape == "diams" ? `hearts` : `spades`}">&${shape};</span>
+				</div>
+				<div class="col">
+					<span class="${shape == "hearts" || shape == "diams" ? `hearts` : `spades`} hidden">&${shape};</span>
+					<span class="${shape == "hearts" || shape == "diams" ? `hearts` : `spades`} hidden">&${shape};</span>
+				</div>
+				<div class="col">
+					<span class="${shape == "hearts" || shape == "diams" ? `hearts` : `spades`}">&${shape};</span>
+					<span class="${shape == "hearts" || shape == "diams" ? `hearts` : `spades`}">&${shape};</span>
+					<span class="${shape == "hearts" || shape == "diams" ? `hearts` : `spades`}">&${shape};</span>
+				</div>
+			</div>
+			`;
+		} else if ( number == 7 ) {
+			cardHTML += `
+			<div class="rowOfColumns">
+				<div class="col">
+					<span class="${shape == "hearts" || shape == "diams" ? `hearts` : `spades`}">&${shape};</span>
+					<span class="${shape == "hearts" || shape == "diams" ? `hearts` : `spades`}">&${shape};</span>
+					<span class="${shape == "hearts" || shape == "diams" ? `hearts` : `spades`}">&${shape};</span>
+				</div>
+				<div class="col">
+					<span class="${shape == "hearts" || shape == "diams" ? `hearts` : `spades`}">&${shape};</span>
+					<span class="${shape == "hearts" || shape == "diams" ? `hearts` : `spades`} hidden">&${shape};</span>
+				</div>
+				<div class="col">
+					<span class="${shape == "hearts" || shape == "diams" ? `hearts` : `spades`}">&${shape};</span>
+					<span class="${shape == "hearts" || shape == "diams" ? `hearts` : `spades`}">&${shape};</span>
+					<span class="${shape == "hearts" || shape == "diams" ? `hearts` : `spades`}">&${shape};</span>
+				</div>
+			</div>
+			`;
+		} else if ( number == 8 ) {
+			cardHTML += `
+			<div class="rowOfColumns">
+				<div class="col">
+					<span class="${shape == "hearts" || shape == "diams" ? `hearts` : `spades`}">&${shape};</span>
+					<span class="${shape == "hearts" || shape == "diams" ? `hearts` : `spades`}">&${shape};</span>
+					<span class="${shape == "hearts" || shape == "diams" ? `hearts` : `spades`}">&${shape};</span>
+				</div>
+				<div class="col">
+					<span class="${shape == "hearts" || shape == "diams" ? `hearts` : `spades`}">&${shape};</span>
+					<span class="${shape == "hearts" || shape == "diams" ? `hearts` : `spades`}">&${shape};</span>
+				</div>
+				<div class="col">
+					<span class="${shape == "hearts" || shape == "diams" ? `hearts` : `spades`}">&${shape};</span>
+					<span class="${shape == "hearts" || shape == "diams" ? `hearts` : `spades`}">&${shape};</span>
+					<span class="${shape == "hearts" || shape == "diams" ? `hearts` : `spades`}">&${shape};</span>
+				</div>
+			</div>
+			`;
+		} else if ( number == 9 ) {
+			cardHTML += `
+			<div class="rowOfColumns">
+				<div class="col-smaller">
+					<span class="${shape == "hearts" || shape == "diams" ? `hearts` : `spades`}">&${shape};</span>
+					<span class="${shape == "hearts" || shape == "diams" ? `hearts` : `spades`}">&${shape};</span>
+					<span class="${shape == "hearts" || shape == "diams" ? `hearts` : `spades`}">&${shape};</span>
+					<span class="${shape == "hearts" || shape == "diams" ? `hearts` : `spades`}">&${shape};</span>
+				</div>
+				<div class="col">
+					<span class="${shape == "hearts" || shape == "diams" ? `hearts` : `spades`}">&${shape};</span>
+				</div>
+				<div class="col-smaller">
+					<span class="${shape == "hearts" || shape == "diams" ? `hearts` : `spades`}">&${shape};</span>
+					<span class="${shape == "hearts" || shape == "diams" ? `hearts` : `spades`}">&${shape};</span>
+					<span class="${shape == "hearts" || shape == "diams" ? `hearts` : `spades`}">&${shape};</span>
+					<span class="${shape == "hearts" || shape == "diams" ? `hearts` : `spades`}">&${shape};</span>
+				</div>
+			</div>
+			`
+		} else if ( number == 10 ) {
+			cardHTML += `
+			<div class="rowOfColumns">
+				<div class="col-smaller">
+					<span class="${shape == "hearts" || shape == "diams" ? `hearts` : `spades`}">&${shape};</span>
+					<span class="${shape == "hearts" || shape == "diams" ? `hearts` : `spades`}">&${shape};</span>
+					<span class="${shape == "hearts" || shape == "diams" ? `hearts` : `spades`}">&${shape};</span>
+					<span class="${shape == "hearts" || shape == "diams" ? `hearts` : `spades`}">&${shape};</span>
+				</div>
+				<div class="col">
+					<span class="${shape == "hearts" || shape == "diams" ? `hearts` : `spades`}">&${shape};</span>
+					<span class="${shape == "hearts" || shape == "diams" ? `hearts` : `spades`} hidden">&${shape};</span>
+					<span class="${shape == "hearts" || shape == "diams" ? `hearts` : `spades`}">&${shape};</span>
+				</div>
+				<div class="col-smaller">
+					<span class="${shape == "hearts" || shape == "diams" ? `hearts` : `spades`}">&${shape};</span>
+					<span class="${shape == "hearts" || shape == "diams" ? `hearts` : `spades`}">&${shape};</span>
+					<span class="${shape == "hearts" || shape == "diams" ? `hearts` : `spades`}">&${shape};</span>
+					<span class="${shape == "hearts" || shape == "diams" ? `hearts` : `spades`}">&${shape};</span>
+				</div>
+			</div>
+			`;
+		} else if ( number == 11 ) {
+			if( shape == "spades" ) {
+				cardHTML += `
+				<div class="rowOfColumns">
+					<img src="./img/JS.png" />
+				</div>
+				`;
+			} else if( shape == "clubs" ) {
+				cardHTML += `
+				<div class="rowOfColumns">
+					<img src="./img/JC.png" />
+				</div>
+				`;
+			} else if( shape == "hearts" ) {
+				cardHTML += `
+				<div class="rowOfColumns">
+					<img src="./img/JH.png" />
+				</div>
+				`;
+			} else if( shape == "diams" ) {
+				cardHTML += `
+				<div class="rowOfColumns">
+					<img src="./img/JD.png" />
+				</div>
+				`;
+			}
+		} else if ( number == 12 ) {
+			if( shape == "spades" ) {
+				cardHTML += `
+				<div class="rowOfColumns">
+					<img src="./img/QS.png" />
+				</div>
+				`;
+			} else if( shape == "clubs" ) {
+				cardHTML += `
+				<div class="rowOfColumns">
+					<img src="./img/QC.png" />
+				</div>
+				`;
+			} else if( shape == "hearts" ) {
+				cardHTML += `
+				<div class="rowOfColumns">
+					<img src="./img/QH.png" />
+				</div>
+				`;
+			} else if( shape == "diams" ) {
+				cardHTML += `
+				<div class="rowOfColumns">
+					<img src="./img/QD.png" />
+				</div>
+				`;
+			}
+		} else if ( number == 13 ) {
+			if( shape == "spades" ) {
+				cardHTML += `
+				<div class="rowOfColumns">
+					<img src="./img/KS.png" />
+				</div>
+				`;
+			} else if( shape == "clubs" ) {
+				cardHTML += `
+				<div class="rowOfColumns">
+					<img src="./img/KC.png" />
+				</div>
+				`;
+			} else if( shape == "hearts" ) {
+				cardHTML += `
+				<div class="rowOfColumns">
+					<img src="./img/KH.png" />
+				</div>
+				`;
+			} else if( shape == "diams" ) {
+				cardHTML += `
+				<div class="rowOfColumns">
+					<img src="./img/KD.png" />
+				</div>
+				`;
+			}
+		} else if( number == 14 ) {
+			cardHTML += `
+			<div class="rowOfColumns">
+				<div class="col">
 					<span class="${shape == "hearts" || shape == "diams" ? `hearts` : `spades`} large">&${shape};</span>
 				</div>
 			</div>
@@ -534,6 +882,17 @@ $(document).ready(function(){
 		
 		//console.log(cardHTML);
 	}
+
+
+
+
+
+
+
+
+
+
+
 
 	let addCard = document.getElementById("add");
 
@@ -625,9 +984,11 @@ $(document).ready(function(){
 
 
 	addCard.addEventListener('click', () => {
-		let randomPlayer = Math.floor(Math.random() * 4);
-		createAndAddCard(randomPlayer);
-		changeWidthBasedOnNumberOfCards(randomPlayer);
+		
+		drawSeperateCard(number , shape);
+		//let randomPlayer = Math.floor(Math.random() * 4);
+		//createAndAddCard(randomPlayer);
+		//changeWidthBasedOnNumberOfCards(randomPlayer);
 	});
 	
 	
@@ -740,11 +1101,11 @@ $(document).ready(function(){
 	});
 
 
-	$(document).on('mouseover','div.container div.card',function(){
+	$(document).on('mouseover','div.card',function(){
 		$(this).css("top", "-10px");
 	});
 
-	$(document).on('mouseleave','div.container div.card',function(){
+	$(document).on('mouseleave','div.card',function(){
 		$(this).css("top", "0px");
 	});
 
@@ -771,26 +1132,32 @@ $(document).ready(function(){
 			$("#hokm_right").html(`&${hokm};`);
 			$("#hokm_right").css('color',`${hokm == "spades" || hokm == "clubs" ? `black` : `red` }`);
 			
+			$("div.hokmDetails").fadeIn(1000 , () => {
+				$("div.hokmDetails").css("opacity","1");
+			});
 			
 			$("div.hokmContainer").fadeOut(1000 , () => {
 				$("div.gameBoard").css("display","flex");
+				$("div.hokmContainer").css("display","none");
 			});
+
+			
 
 			
 		}
 	});
 
 
-	$(document).on('click','div#myContainer div.cardContainer',function(){
+	$(document).on('click','div.card',function(){
 
 		let z_index = 2;
 
-		$(this).children().css("left","0px");
+		//$(this).children().css("left","0px");
 		//$(this).children().css("z-index",z_index);
-		$(this).children().css("transform","scale(1.1)");
+		//$(this).children().css("transform","scale(1.1)");
 
 		let id = $(this).attr("id");
-		//console.log(id);
+		console.log(id);
 
 		let cutText = document.getElementById(id).innerHTML;
 		console.log(cutText);

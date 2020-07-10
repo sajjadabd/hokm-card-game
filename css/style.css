@@ -32,11 +32,19 @@ body {
 	display : flex;
 	flex-direction : column;
 	overflow : hidden;
-	height : 95vh;
+	height : 100vh;
+	box-sizing: border-box;
+	margin : 0;
+	background : linear-gradient(to right , brown , chocolate);
 }
 
 div.myInput {
 	text-align : center;
+}
+
+div.myInput * {
+	font-family : RobotoThin;
+	font-weight: bold;
 }
 
 div.wrapper {
@@ -68,9 +76,10 @@ div.playerFront {
 	top : 0px;
 	left : 35%;
 	transform : translateX(-50%);
-	border : 1px solid black;
+	/* border : 1px solid black; */
 	transform : rotate(180deg);
 }
+
 
 div.playerRight {
 	display : flex;
@@ -78,10 +87,10 @@ div.playerRight {
 	position : absolute;
 	margin : auto;
 	width : 300px;
-	right : -90px;
-	bottom : 50%;
+	right : -130px;
+	bottom : 60%;
 	transform : translateY(-50%);
-	border : 1px solid black;
+	/* border : 1px solid black; */
 	transform : rotate(-90deg);
 }
 
@@ -91,10 +100,10 @@ div.playerLeft {
 	position : absolute;
 	margin : auto;
 	width : 300px;
-	left : -90px;
-	top : 60%;
+	left : -130px;
+	top : 50%;
 	transform : translateY(-50%);
-	border : 1px solid black;
+	/* border : 1px solid black; */
 	transform : rotate(90deg);
 }
 
@@ -142,11 +151,13 @@ div.cardContainer {
 }
 
 div.card {
-	transform: scale(1.2); /* Equal to scaleX(0.7) scaleY(0.7) */
+	transform: scale(1); /* Equal to scaleX(0.7) scaleY(0.7) */
 	background-color : white;
 	position : relative;
 	display : flex;
 	flex-direction : column;
+	/* width : 18vw;
+	height : 25vw; */
 	width : 90px;
 	height : 130px;
 	border : 1px solid black;
@@ -163,10 +174,13 @@ div.card {
 
 div.otherCard {
 	transform: scale(0.6); /* Equal to scaleX(0.7) scaleY(0.7) */
+	transform-origin: bottom;
 	background-color : white;
 	position : relative;
 	display : flex;
 	flex-direction : column;
+	/* width : 18vw;
+	height : 25vw; */
 	width : 90px;
 	height : 130px;
 	border : 1px solid black;
@@ -179,32 +193,7 @@ div.otherCard {
 	user-select: none;          /* Likely future */ 
 }
 
-/*
-div.card:nth-child(1) {
-	top : 0px;
-	left : 0px;
-}
 
-div.card:nth-child(2) {
-	top : 0px;
-	left : -60px;
-}
-
-div.card:nth-child(3) {
-	top : 0px;
-	left : -120px;
-}
-
-div.card:nth-child(4) {
-	top : 0px;
-	left : -180px;
-}
-
-div.card:hover{
-	top : -10px;
-}
-
-*/
 
 
 
@@ -245,7 +234,7 @@ div.row {
 	display : flex;
 	flex-direction : row;
 	/*margin : auto;*/ /*Scary Code -- bad padding*/
-	width : 65%;
+	/* width : 65%; */
 	/*justify-content : center;
 	align-items : center;*/
 }
@@ -254,6 +243,14 @@ div.col {
 	display : flex;
 	flex-direction : column;
 	align-items : center;
+	justify-content : center;
+}
+
+div.col-smaller {
+	display : flex;
+	flex-direction : column;
+	align-items : center;
+	height : 90%;
 	justify-content : space-around;
 }
 
@@ -285,7 +282,6 @@ div.col-medium {
 div.rowOfColumns {
 	display : flex;
 	flex-direction : row;
-	width : 70%;
 	justify-content : center;
 	align-items : center;
 }
@@ -305,48 +301,61 @@ div.card div.seperate {
 	transform : translate(-50%,-50%);
 }
 
-div.row span {
-	width : 30px;
-	padding-right : 6px;
+
+div.col span {
+	margin : 1px;
 }
+
 
 
 span.hidden {
 	visibility : hidden;
-}
+} 
 
 span.large {
 	font-size : 3em;
 }
 
 img {
-	width : 90%;
-	border : 1px solid black;
+	object-fit: cover;
+	width : 60%;
+	border : 2px solid black;
 }
 
 
 
 div.yourContainer {
 	position : absolute ;
-	bottom : 0;
+	z-index : 20;
+	bottom : 20px;
 	left : 50%;
 	transform : translateX(-50%);
 	width : 300px;
 	height : auto;
-	border : 1px solid aqua;
+	/* border : 10px solid aqua; */
 }
 
 
+
+
+
 div.hokmContainer{
+	/* display : flex; */
 	display : none;
 	flex-direction : row;
 	justify-content: space-between;
 	position : relative;
+	z-index : 10;
 	width : 200px;
 	height : 50px;
-	bottom : 170px;
+	bottom : 140px;
 	left : 50%;
 	transform : translateX(-50%);
+}
+
+
+div.hokmContainer .hokm {
+	color : white;
 }
 
 
@@ -359,27 +368,7 @@ span.cursor {
 	transition : 0.1s;
 }
 
-/*
-span.cursor:nth-child(1) {
-	left : 0;
-	transform : translateX(-50%);
-}
 
-span.cursor:nth-child(2) {
-	left : 25%;
-	transform : translateX(-50%);
-}
-
-span.cursor:nth-child(3) {
-	left : 50%;
-	transform : translateX(-50%);
-}
-
-span.cursor:nth-child(4) {
-	left : 75%;
-	transform : translateX(-50%);
-}
-*/
 
 span.cursor:hover {
 	position : relative;
@@ -390,16 +379,15 @@ span.cursor:hover {
 
 
 div.hokmDetails {
-	font-size : 3em;
+	font-size : 2em;
 	display : flex;
-	display : none;
+	opacity : 0;
 	flex-direction : row;
 	justify-content: space-between;
 	position : absolute;
-	width : 100px;
-	height : 50px;
-	bottom : 170px;
-	right : -100px;
+	width : 60px;
+	bottom : 140px;
+	right : -30px;
 	border : 1px solid black;
 	-webkit-user-select: none;  /* Chrome all / Safari all */
 	-moz-user-select: none;     /* Firefox all */
@@ -410,14 +398,12 @@ div.hokmDetails {
 
 div.hokmDetailsForOthers {
 	font-size : 2em;
-	visibility: hidden;
-	display : flex;
+	display : none;
 	flex-direction : row;
 	justify-content: space-between;
 	position : absolute;
 	width : 60px;
-	height : 50px;
-	bottom : 100px;
+	bottom : 140px;
 	right : 0px;
 	border : 1px solid black;
 	-webkit-user-select: none;  /* Chrome all / Safari all */
@@ -429,9 +415,10 @@ div.hokmDetailsForOthers {
 
 div.centerCard {
 	transform: scale(0.7); /* Equal to scaleX(0.7) scaleY(0.7) */
-	visibility: hidden;
+	/* visibility: hidden; */
 	background-color : white;
 	position : relative;
+	z-index : 3;
 	display : flex;
 	margin : auto;
 	flex-direction : column;
@@ -448,30 +435,29 @@ div.centerCard {
 }
 
 div.greenBack {
-	margin : 5px;
 	background-color : green;
-	border : 2px solid white;
-	width : 78px;
-	height : 100%;
+	border-radius : 5px;
+	width : calc(100% - 15%);
+	height : calc(100% - 10%);
+	display : flex;
+	justify-content: center;
+	align-items : center;
 }
 
 div.insideGreen {
-	margin : 5px;
 	background-color : green;
 	border : 2px solid white;
-	width : 65px;
-	height : 88%;
+	border-radius: 2px;
+	width : calc(100% - 15%);
+	height : calc(100% - 10%);
 	display : flex;
-	flex-direction : column;
-	justify-content : space-evenly;
+	justify-content : center;
 	align-items : center;
 	font-size : 2em;
 }
 
 div.insideGreen div {
 	display : flex;
-	position : relative;
-	margin : auto;
 	justify-content : center;
 	align-items : center;
 	width : 30px;
@@ -494,10 +480,11 @@ div.insideSpades {
 }
 
 div.gameBoard {
-	display : flex;
+	/* display : flex; */
 	display : none;
 	margin : auto;
 	position : absolute;
+	z-index : 4;
 	top : 50%;
 	left :  50%;
 	transform : translate(-50%,-50%);
@@ -514,7 +501,7 @@ div.top , div.down, div.right , div.left {
 	flex-direction : column;
 	width : 90px;
 	height : 130px;
-
+	border : 1px solid black;
 	border-radius : 10px;
 	justify-content : center;
 	align-items : center;
@@ -527,6 +514,7 @@ div.top , div.down, div.right , div.left {
 
 div.top {
 	position : absolute;
+	z-index : 4;
 	top : 25%;
 	left : 50%;
 	transform : translate(-50%,-50%) scale(0.7);
@@ -534,6 +522,7 @@ div.top {
 
 div.down {
 	position : absolute;
+	z-index : 4;
 	top : 75%;
 	left : 50%;
 	transform : translate(-50%,-50%) scale(0.7);
@@ -553,5 +542,114 @@ div.right {
 	transform : translate(-50%,-50%) scale(0.7);
 } 
 
+
+
+
+
+@media only screen and (max-width: 900px) {
+	div.playerFront {
+		transform : rotate(180deg) scale(0.7);
+		left : 25%;
+	}
+
+	div.playerRight {
+		transform : rotate(-90deg) scale(0.7);
+		right : -140px;
+		bottom : 60%;
+	}
+
+	div.playerLeft {
+		transform : rotate(90deg) scale(0.7);
+		left : -140px;
+		top : 50%;
+	}
+
+	div.yourContainer {
+		transform : scale(0.9);
+		margin : auto;
+		left : 30%;
+	}
+
+	div.centerCard {
+		transform : scale(0.5);
+	}
+
+	div.gameBoard {
+		transform : translate(-50%,-50%) scale(0.8);
+	}
+}
+
+
+
+
+@media only screen and (max-width: 600px) {
+	div.playerFront {
+		transform : rotate(180deg) scale(0.6);
+		left : 10%;
+	}
+
+	div.playerRight {
+		transform : rotate(-90deg) scale(0.6);
+		right : -140px;
+		bottom : 60%;
+	}
+
+	div.playerLeft {
+		transform : rotate(90deg) scale(0.6);
+		left : -140px;
+		top : 50%;
+	}
+
+	div.yourContainer {
+		transform : scale(0.7);
+		margin : auto;
+		left : 15%;
+	}
+
+	div.centerCard {
+		transform : scale(0.5);
+	}
+
+	div.gameBoard {
+		transform : translate(-50%,-50%) scale(0.7);
+	}
+}
+
+
+
+
+
+
+
+@media only screen and (max-width: 400px) {
+	div.playerFront {
+		transform : rotate(180deg) scale(0.6);
+		left : 0%;
+	}
+
+	div.playerRight {
+		transform : rotate(-90deg) scale(0.6);
+		right : -140px;
+	}
+
+	div.playerLeft {
+		transform : rotate(90deg) scale(0.6);
+		left : -140px;
+	}
+
+	div.yourContainer {
+		transform : scale(0.7);
+		margin : auto;
+		left : 5%;
+	}
+
+	div.centerCard {
+		transform : scale(0.3);
+	}
+
+	div.gameBoard {
+		transform : translate(-50%,-50%) scale(0.7);
+	}
+}
 
 

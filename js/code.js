@@ -11,6 +11,7 @@ $(document).ready(function(){
 	}
 
 	let board = new Board();
+	let zIndex = 4;
 
 
 	class Person {
@@ -24,17 +25,23 @@ $(document).ready(function(){
 		}
 
 
-		removeFromCards = (whichPlayer) => {
-			console.log(`.player_${whichPlayer}`);
+		removeFromCards = (whichPlayer , where) => {
+			//console.log(`name : ${name}`);
+			let lastCard = this.cards.pop();
+			this.counter--;
+			let split = lastCard.split(" ");
+			let cardNumber = split[0];
+			let cardShape  = split[1];
+
+			zIndex++;
+
+			drawSeperateCard(cardNumber, cardShape);
+
+			//console.log(`.player_${whichPlayer}`);
 			let cards = $(`.player_${whichPlayer}`).last();
 			
-			if( whichPlayer == 1 ) {
-				document.getElementById("right").innerHTML = cards.html();
-			} else if ( whichPlayer == 2 ) {
-				document.getElementById("top").innerHTML = cards.html();
-			} else if ( whichPlayer == 3 ) {
-				document.getElementById("left").innerHTML = cards.html();
-			}
+			document.getElementById(where).innerHTML = cardHTML;
+			document.getElementById(where).style.zIndex = zIndex;
 
 			cards.remove();
 			console.log(cards);
@@ -239,7 +246,7 @@ $(document).ready(function(){
 
 
 	let drawSeperateCard = (number, shape) => {
-		cardHTML = `<div>`;
+		cardHTML = `<div class="seperateCard">`;
 
 		if(number == 11 ) {
 			cardHTML += `
@@ -547,8 +554,10 @@ $(document).ready(function(){
 		</div>`;
 
 
-		let centerCard = document.getElementById('centerCard');
-		centerCard.innerHTML = cardHTML;
+		//let centerCard = document.getElementById('centerCard');
+		//centerCard.innerHTML = cardHTML;
+
+		
 	}
 
 
@@ -1212,12 +1221,20 @@ $(document).ready(function(){
 
 		let id = $(this).attr("id");
 		console.log(id);
+		let compareID = id.replace("_", " ");
 
-		let cutText = document.getElementById(id).innerHTML;
+		let split = compareID.split(" ");
+		let cardNumber = split[0];
+		let cardShape = split[1];
+
+		drawSeperateCard(cardNumber, cardShape);
+
+		//let cutText = document.getElementById(id).innerHTML;
 		//console.log(cutText);
-
+		zIndex++;
 		//document.getElementById("down").style.zIndex = z_index;
-		document.getElementById("down").innerHTML = cutText;
+		document.getElementById("down").innerHTML = cardHTML;
+		document.getElementById("down").style.zIndex = zIndex;
 		//document.getElementById("top").innerHTML = cutText;
 		//document.getElementById("right").innerHTML = cutText;
 		//document.getElementById("left").innerHTML = cutText;
@@ -1226,7 +1243,7 @@ $(document).ready(function(){
 		game.players[0].counter--;
 		//changeWidthBasedOnNumberOfCards(0);
 
-		let compareID = id.replace("_", " ");
+		
 		//console.log(compareID);
 		board.down = compareID;
 		console.log(board);
@@ -1249,14 +1266,31 @@ $(document).ready(function(){
 		}
 		//-----------------------------------------
 
-		//yourTurn = false;
+		yourTurn = false;
 
 		/*
 		here other players should act
 		*/
-		game.players[1].removeFromCards(1);
-		game.players[1].removeFromCards(2);
-		game.players[1].removeFromCards(3);
+		setTimeout( () => {
+			game.players[1].removeFromCards(1,"right");
+			setTimeout( () => {
+				game.players[2].removeFromCards(2,"top");
+				setTimeout( () => {
+					game.players[3].removeFromCards(3,"left");
+					setTimeout( () => {
+						document.getElementById("down").innerHTML = ``;
+						document.getElementById("top").innerHTML = ``;
+						document.getElementById("right").innerHTML = ``;
+						document.getElementById("left").innerHTML = ``;
+
+						yourTurn = true;
+					} , 500);
+				} , 500);
+			} , 500);
+		}, 500);
+		
+		
+		
 	});
 
 	

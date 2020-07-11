@@ -40,7 +40,7 @@ body {
 
 div.myInput {
 	text-align : center;
-	/* visibility : hidden; */
+	visibility : hidden;
 }
 
 div.myInput * {
@@ -62,11 +62,27 @@ div.container {
 	width : 300px;
 	flex-direction : row;
 	position : absolute;
-	bottom : 0;
+	bottom : 3px;
 	left : 50%;
 	transform : translateX(-50%);
 	border : 1px solid red;
+	box-sizing : border-box;
 }
+
+
+div.yourContainer {
+	position : absolute ;
+	z-index : 20;
+	bottom : 3px;
+	left : 50%;
+	transform : translateX(-50%);
+	width : 300px;
+	height : auto;
+	/* border : 10px solid aqua; */
+	box-sizing : border-box;
+}
+
+
 
 div.playerFront {
 	display : flex;
@@ -79,6 +95,7 @@ div.playerFront {
 	transform : translateX(-50%);
 	/* border : 1px solid black; */
 	transform : rotate(180deg);
+	box-sizing : border-box;
 }
 
 
@@ -93,6 +110,7 @@ div.playerRight {
 	transform : translateY(-50%);
 	/* border : 1px solid black; */
 	transform : rotate(-90deg);
+	box-sizing : border-box;
 }
 
 div.playerLeft {
@@ -106,6 +124,7 @@ div.playerLeft {
 	transform : translateY(-50%);
 	/* border : 1px solid black; */
 	transform : rotate(90deg);
+	box-sizing : border-box;
 }
 
 div.boxControllerForTop {
@@ -152,6 +171,7 @@ div.cardContainer {
 }
 
 div.card {
+	box-sizing : border-box;
 	transform: scale(1); /* Equal to scaleX(0.7) scaleY(0.7) */
 	background-color : white;
 	position : relative;
@@ -191,7 +211,8 @@ div.seperateCard {
 
 
 div.otherCard {
-	transform: scale(0.6); /* Equal to scaleX(0.7) scaleY(0.7) */
+	box-sizing : border-box;
+	transform: scale(0.5); /* Equal to scaleX(0.7) scaleY(0.7) */
 	transform-origin: bottom;
 	background-color : white;
 	position : relative;
@@ -342,17 +363,6 @@ img {
 
 
 
-div.yourContainer {
-	position : absolute ;
-	z-index : 20;
-	bottom : 20px;
-	left : 50%;
-	transform : translateX(-50%);
-	width : 300px;
-	height : auto;
-	/* border : 10px solid aqua; */
-}
-
 
 
 
@@ -362,7 +372,7 @@ div.hokmContainer{
 	display : none;
 	flex-direction : row;
 	justify-content: space-between;
-	position : relative;
+	position : absolute; /* if you make it relative it affects on yourContainer when become visible */
 	z-index : 10;
 	width : 200px;
 	height : 50px;
@@ -505,13 +515,12 @@ div.gameBoard {
 	z-index : 4;
 	top : 50%;
 	left :  50%;
-	transform : translate(-50%,-50%);
+	transform : translate(-50%,-50%) scale(1); /* Equal to scaleX(0.7) scaleY(0.7) */
 	width : 200px;
 	height : 200px;
 }
 
 div.top , div.down, div.right , div.left {
-	transform: scale(0.7); /* Equal to scaleX(0.7) scaleY(0.7) */
 	visibility: visible;
 	/* background-color : white; */
 	display : flex;
@@ -566,18 +575,18 @@ div.right {
 
 @media only screen and (max-width: 900px) {
 	div.playerFront {
-		transform : rotate(180deg) scale(0.7);
+		transform : rotate(180deg) scale(0.8);
 		left : 25%;
 	}
 
 	div.playerRight {
-		transform : rotate(-90deg) scale(0.7);
+		transform : rotate(-90deg) scale(0.8);
 		right : -140px;
 		bottom : 60%;
 	}
 
 	div.playerLeft {
-		transform : rotate(90deg) scale(0.7);
+		transform : rotate(90deg) scale(0.8);
 		left : -140px;
 		top : 50%;
 	}
@@ -593,7 +602,7 @@ div.right {
 	}
 
 	div.gameBoard {
-		transform : translate(-50%,-50%) scale(0.8);
+		transform : translate(-50%,-50%) scale(1);
 	}
 }
 
@@ -602,25 +611,24 @@ div.right {
 
 @media only screen and (max-width: 600px) {
 	div.playerFront {
-		transform : rotate(180deg) scale(0.6);
+		transform : rotate(180deg) scale(0.8);
 		left : 10%;
 	}
 
 	div.playerRight {
-		transform : rotate(-90deg) scale(0.6);
+		transform : rotate(-90deg) scale(0.8);
 		right : -140px;
 		bottom : 60%;
 	}
 
 	div.playerLeft {
-		transform : rotate(90deg) scale(0.6);
+		transform : rotate(90deg) scale(0.8);
 		left : -140px;
 		top : 50%;
 	}
 
 	div.yourContainer {
-		transform : scale(0.7);
-		margin : auto;
+		transform : scale(0.8);
 		left : 15%;
 	}
 
@@ -629,7 +637,7 @@ div.right {
 	}
 
 	div.gameBoard {
-		transform : translate(-50%,-50%) scale(0.7);
+		transform : translate(-50%,-50%) scale(0.9);
 	}
 }
 
@@ -641,24 +649,23 @@ div.right {
 
 @media only screen and (max-width: 400px) {
 	div.playerFront {
-		transform : rotate(180deg) scale(0.6);
+		transform : rotate(180deg) scale(0.7);
 		left : 0%;
 	}
 
 	div.playerRight {
-		transform : rotate(-90deg) scale(0.6);
+		transform : rotate(-90deg) scale(0.7);
 		right : -140px;
 	}
 
 	div.playerLeft {
-		transform : rotate(90deg) scale(0.6);
+		transform : rotate(90deg) scale(0.7);
 		left : -140px;
 	}
 
 	div.yourContainer {
 		transform : scale(0.7);
-		margin : auto;
-		left : 5%;
+		left : 0%;
 	}
 
 	div.centerCard {
@@ -666,7 +673,7 @@ div.right {
 	}
 
 	div.gameBoard {
-		transform : translate(-50%,-50%) scale(0.7);
+		transform : translate(-50%,-50%) scale(0.8);
 	}
 }
 

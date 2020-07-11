@@ -12,6 +12,14 @@ $(document).ready(function(){
 
 	let board = new Board();
 	let zIndex = 4;
+	let audio = new Audio('./mp3/toss.mp3');
+	
+	let playAudio = () => {
+		audio.play();
+		// setTimeout( () => {
+		// 	audio.pause();
+		// }, 500);
+	}
 
 
 	class Person {
@@ -27,6 +35,7 @@ $(document).ready(function(){
 
 		removeFromCards = (whichPlayer , where) => {
 			//console.log(`name : ${name}`);
+			
 			let lastCard = this.cards.pop();
 			this.counter--;
 			let split = lastCard.split(" ");
@@ -43,7 +52,9 @@ $(document).ready(function(){
 			document.getElementById(where).innerHTML = cardHTML;
 			document.getElementById(where).style.zIndex = zIndex;
 
+			
 			cards.remove();
+			playAudio();
 			console.log(cards);
 		}
 
@@ -206,39 +217,39 @@ $(document).ready(function(){
 
 	let card = document.getElementById("theCard");
 
-	let input = document.getElementById("number");
+	// let input = document.getElementById("number");
 
-	input.addEventListener('input', (e) => {
-		number = e.target.value;
+	// input.addEventListener('input', (e) => {
+	// 	number = e.target.value;
 
-		drawSeperateCard(number, shape);
-	});
+	// 	drawSeperateCard(number, shape);
+	// });
 
-	let select = document.getElementById("shapes");
+	// let select = document.getElementById("shapes");
 
 
-	select.addEventListener('change' , (e) => {
-		shape = e.target.value;
+	// select.addEventListener('change' , (e) => {
+	// 	shape = e.target.value;
 
-		drawSeperateCard(number, shape);
-	});
+	// 	drawSeperateCard(number, shape);
+	// });
 
 
 	let container = document.getElementById("myContainer");
 
 
-	let initialize = () => {
-		input.value = 9;
-		select.value = "hearts";
-	}
+	// let initialize = () => {
+	// 	input.value = 9;
+	// 	select.value = "hearts";
+	// }
 
-	initialize();
+	// initialize();
 
-	addRandom = document.getElementById("addRandom");
+	// addRandom = document.getElementById("addRandom");
 
-	addRandom.addEventListener("click", () => {
-		generateRandomCard();
-	});
+	// addRandom.addEventListener("click", () => {
+	// 	generateRandomCard();
+	// });
 
 
 
@@ -950,7 +961,15 @@ $(document).ready(function(){
 
 
 
-	let addCard = document.getElementById("add");
+	// let addCard = document.getElementById("add");
+
+	// addCard.addEventListener('click', () => {
+		
+	// 	drawSeperateCard(number , shape);
+	// 	//let randomPlayer = Math.floor(Math.random() * 4);
+	// 	//createAndAddCard(randomPlayer);
+	// 	//changeWidthBasedOnNumberOfCards(randomPlayer);
+	// });
 
 	let verifyNumberAndShape = (number, shape) => {
 		return true;
@@ -1040,13 +1059,7 @@ $(document).ready(function(){
 
 
 
-	addCard.addEventListener('click', () => {
-		
-		drawSeperateCard(number , shape);
-		//let randomPlayer = Math.floor(Math.random() * 4);
-		//createAndAddCard(randomPlayer);
-		//changeWidthBasedOnNumberOfCards(randomPlayer);
-	});
+	
 	
 	
 
@@ -1124,39 +1137,59 @@ $(document).ready(function(){
 
 
 
-	let drawCards = document.getElementById("drawCards");
+	//let drawCards = document.getElementById("drawCards");
+
+	// drawCards.addEventListener('click', () => {
+
+	// 	divideCardsToPlayers();
+
+	// });
+
+
+
 	let randomCard ;
 	let splitedCard ;
 
-	drawCards.addEventListener('click', () => {
+	let d = 0;
 
+	let divideCardsToPlayers = () => {
 		let drawer = [5,4,4];
-		
-		for(let d=0;d<drawer.length;d++){
-			for(let player=0;player<4;player++) {
-				for(let insideCounter=0;insideCounter<drawer[d];insideCounter++) {
-					if(game.players[player].popCounter >= 0) {
-						randomCard = game.players[player].cards[game.players[player].popCounter];
-						game.players[player].popCounter--;
-						//console.log(randomCard);
-						splitedCard = randomCard.split(" ");
-						number = splitedCard[0];
-						shape = splitedCard[1];
-				
-						createAndAddCard(player);
-						changeWidthBasedOnNumberOfCards(player);
-						
-						if(game.players[player].popCounter == -1) {
-							sortDeckOfCardsOfPlayer(player)
-						}
-						
-					} 
+		//console.log(d);
+		for(;d<drawer.length;d++){
+			if( d == 0 || select_hokm == true) {
+				for(let player=0;player<4;player++) {
+					for(let insideCounter=0;insideCounter<drawer[d];insideCounter++) {
+						if(game.players[player].popCounter >= 0) {
+							randomCard = game.players[player].cards[game.players[player].popCounter];
+							game.players[player].popCounter--;
+							//console.log(randomCard);
+							splitedCard = randomCard.split(" ");
+							number = splitedCard[0];
+							shape = splitedCard[1];
+					
+							createAndAddCard(player);
+							changeWidthBasedOnNumberOfCards(player);
+							
+							if(game.players[player].popCounter == -1) {
+								sortDeckOfCardsOfPlayer(player)
+							}
+						} 
+					}
 				}
+			} else {
+				$("div.hokmContainer").fadeIn(1000);
+				$("div.hokmContainer").css("display", "flex");
+				return;
 			}
 		}
-	});
 
-	let yourTurn = true;
+		//$("div.gameBoard").css("display","flex");
+		//$("div.hokmContainer").css("display","none");
+	}
+
+	
+
+	let yourTurn = false;
 
 	$(document).on('mouseover','div.card',function(){
 		if(yourTurn == true) {
@@ -1181,16 +1214,17 @@ $(document).ready(function(){
 			$("#hokm_me").html(`&${hokm};`);
 			$("#hokm_me").css('color',`${hokm == "spades" || hokm == "clubs" ? `black` : `red` }`);
 			
-			$("#hokm_top").html(`&${hokm};`);
-			$("#hokm_top").css('color',`${hokm == "spades" || hokm == "clubs" ? `black` : `red` }`);
+			// $("#hokm_top").html(`&${hokm};`);
+			// $("#hokm_top").css('color',`${hokm == "spades" || hokm == "clubs" ? `black` : `red` }`);
 			
 
-			$("#hokm_left").html(`&${hokm};`);
-			$("#hokm_left").css('color',`${hokm == "spades" || hokm == "clubs" ? `black` : `red` }`);
+			// $("#hokm_left").html(`&${hokm};`);
+			// $("#hokm_left").css('color',`${hokm == "spades" || hokm == "clubs" ? `black` : `red` }`);
 			
-			$("#hokm_right").html(`&${hokm};`);
-			$("#hokm_right").css('color',`${hokm == "spades" || hokm == "clubs" ? `black` : `red` }`);
+			// $("#hokm_right").html(`&${hokm};`);
+			// $("#hokm_right").css('color',`${hokm == "spades" || hokm == "clubs" ? `black` : `red` }`);
 			
+
 			$("div.hokmDetails").fadeIn(1000 , () => {
 				$("div.hokmDetails").css("opacity","1");
 			});
@@ -1200,14 +1234,62 @@ $(document).ready(function(){
 				$("div.hokmContainer").css("display","none");
 			});
 
-			
+			divideCardsToPlayers();
 
-			
+			yourTurn = true;
 		}
 	});
 
+	let delay = 500;
+	
+	let cleangameBoard = () => {
+		document.getElementById("down").innerHTML = ``;
+		document.getElementById("top").innerHTML = ``;
+		document.getElementById("right").innerHTML = ``;
+		document.getElementById("left").innerHTML = ``;
 
-	$(document).on('click','div.card',function(){
+		yourTurn = true;
+
+	}
+
+
+	let rightTurn = () => {
+		let rightPromise = new Promise( (resolve , reject) => {
+			setTimeout( () => {
+				resolve(game.players[1].removeFromCards(1,"right"));
+			} , delay )
+		});
+	}
+
+	
+	let topTurn = () => {
+		let topPromise = new Promise( (resolve , reject) => {
+			setTimeout( () => {
+				resolve(game.players[2].removeFromCards(2,"top"));
+			} , delay * 2 );
+		});
+	}
+
+	let leftTurn = () => {
+		let leftPromise = new Promise( (resolve , reject) => {
+			setTimeout( () => {
+				resolve(game.players[3].removeFromCards(3,"left"));
+			} , delay * 3 );
+		});
+	}
+
+
+	let clearBoard = () => {
+		let clearPromise = new Promise( (resolve , reject) => {
+				setTimeout( () => {
+					resolve(cleangameBoard());
+			} , delay * 4);
+		});
+	}
+
+
+
+	$(document).on('click','div.card', async function () {
 
 		if( yourTurn == false ) {
 			return;
@@ -1239,9 +1321,13 @@ $(document).ready(function(){
 		//document.getElementById("right").innerHTML = cutText;
 		//document.getElementById("left").innerHTML = cutText;
 
+		// play Sound Effect
+		playAudio();
+
+
 		document.getElementById(id).remove();
 		game.players[0].counter--;
-		//changeWidthBasedOnNumberOfCards(0);
+		changeWidthBasedOnNumberOfCards(0);
 
 		
 		//console.log(compareID);
@@ -1271,35 +1357,23 @@ $(document).ready(function(){
 		/*
 		here other players should act
 		*/
-		setTimeout( () => {
-			game.players[1].removeFromCards(1,"right");
-			setTimeout( () => {
-				game.players[2].removeFromCards(2,"top");
-				setTimeout( () => {
-					game.players[3].removeFromCards(3,"left");
-					setTimeout( () => {
-						document.getElementById("down").innerHTML = ``;
-						document.getElementById("top").innerHTML = ``;
-						document.getElementById("right").innerHTML = ``;
-						document.getElementById("left").innerHTML = ``;
+		await rightTurn();
+		await topTurn();
+		await leftTurn();
+		await clearBoard();
+		
 
-						yourTurn = true;
-					} , 500);
-				} , 500);
-			} , 500);
-		}, 500);
-		
-		
-		
 	});
 
-	
 
+
+
+
+	let startGame = () => {
+		divideCardsToPlayers();
+	}
+
+
+	startGame();
 
 });
-
-
-
-
-
-

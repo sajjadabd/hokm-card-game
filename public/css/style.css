@@ -65,7 +65,7 @@ div.container {
 	bottom : 3px;
 	left : 50%;
 	transform : translateX(-50%);
-	border : 1px solid red;
+	/* border : 1px solid red; */
 	box-sizing : border-box;
 }
 
@@ -105,13 +105,19 @@ div.playerRight {
 	position : absolute;
 	margin : auto;
 	width : 300px;
-	right : -130px;
+	right : -140px;
 	bottom : 60%;
 	transform : translateY(-50%);
 	/* border : 1px solid black; */
 	transform : rotate(-90deg);
 	box-sizing : border-box;
 }
+
+
+
+
+
+
 
 div.playerLeft {
 	display : flex;
@@ -135,7 +141,7 @@ div.boxControllerForTop {
 	width : 300px;
 	bottom : 0%;
 	right : 0%;
-	border : 1px solid red;
+	/* border : 1px solid red; */
 }
 
 
@@ -147,7 +153,7 @@ div.boxControllerForRight {
 	width : 300px;
 	bottom : 0;
 	right : 0%;
-	border : 1px solid red;
+	/* border : 1px solid red; */
 }
 
 div.boxControllerForLeft {
@@ -158,7 +164,7 @@ div.boxControllerForLeft {
 	width : 300px;
 	bottom : 0;
 	right : 0%;
-	border : 1px solid red;
+	/* border : 1px solid red; */
 }
 
 
@@ -233,10 +239,26 @@ div.otherCard {
 }
 
 
+div.score {
+	display : flex;
+	flex-direction: row;
+	justify-content : flex-start;
+}
+
+
+div.scoreCard{
+	transform: scale(0.3);
+	top : -150px;
+	left : -30px;
+}
 
 
 
-
+div.scoreCardForOthers {
+	transform: scale(0.3);
+	top : -90px;
+	left : -30px;
+}
 
 
 
@@ -376,14 +398,14 @@ div.hokmContainer{
 	z-index : 10;
 	width : 200px;
 	height : 50px;
-	bottom : 140px;
+	bottom : 150px;
 	left : 50%;
 	transform : translateX(-50%);
 }
 
 
 div.hokmContainer .hokm {
-	color : white;
+	text-shadow: 0px 0px 30px rgba(255, 255, 255, 1);
 }
 
 
@@ -416,7 +438,7 @@ div.hokmDetails {
 	width : 60px;
 	bottom : 140px;
 	right : -30px;
-	border : 1px solid black;
+	/* border : 1px solid black; */
 	-webkit-user-select: none;  /* Chrome all / Safari all */
 	-moz-user-select: none;     /* Firefox all */
 	-ms-user-select: none;      /* IE 10+ */
@@ -433,7 +455,7 @@ div.hokmDetailsForOthers {
 	width : 60px;
 	bottom : 140px;
 	right : 0px;
-	border : 1px solid black;
+	/* border : 1px solid black; */
 	-webkit-user-select: none;  /* Chrome all / Safari all */
 	-moz-user-select: none;     /* Firefox all */
 	-ms-user-select: none;      /* IE 10+ */
@@ -484,6 +506,22 @@ div.insideGreen {
 	font-size : 2em;
 }
 
+
+
+
+
+
+div.insideGreenScore {
+	background-color : green;
+	border-radius: 2px;
+	width : calc(100% - 15%);
+	height : calc(100% - 10%);
+	display : flex;
+	justify-content : center;
+	align-items : center;
+	font-size : 2em;
+}
+
 div.insideGreen div {
 	display : flex;
 	justify-content : center;
@@ -505,6 +543,11 @@ div.insideGreen div:nth-child(2) {
 
 div.insideSpades {
 	color : white;
+}
+
+div.insideSpadesScore {
+	color : white;
+	font-size : 2em;
 }
 
 div.gameBoard {
@@ -581,8 +624,6 @@ div.right {
 
 	div.playerRight {
 		transform : rotate(-90deg) scale(0.8);
-		right : -140px;
-		bottom : 60%;
 	}
 
 	div.playerLeft {
@@ -617,8 +658,6 @@ div.right {
 
 	div.playerRight {
 		transform : rotate(-90deg) scale(0.8);
-		right : -140px;
-		bottom : 60%;
 	}
 
 	div.playerLeft {
@@ -655,7 +694,6 @@ div.right {
 
 	div.playerRight {
 		transform : rotate(-90deg) scale(0.7);
-		right : -140px;
 	}
 
 	div.playerLeft {

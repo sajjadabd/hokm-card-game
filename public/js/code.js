@@ -2,14 +2,25 @@ $(document).ready(function(){
 	
 	class Board {
 		constructor() {
-			this.top = "";
-			this.down = "";
-			this.left = "";
-			this.right = "";
+			this.board = {
+				downCard : '',
+				rightCard : '',
+				topCard : '',
+				leftCard : ''
+			};
+		}
+
+		print = () => {
+			console.log(this.board); 
+		}
+
+
+		checkBoardForScore = () => {
+			console.log(this.board);
 		}
 	}
 
-	let board = new Board();
+	let gameBoard = new Board();
 	let zIndex = 4;
 	
 	let audio = new Audio('./mp3/toss.mp3');
@@ -30,7 +41,7 @@ $(document).ready(function(){
 		let pleaseWait = new Promise( (resolve , reject) => {
 			setTimeout( () => {
 				resolve(true);
-			} , 200 )
+			} , 100 )
 		});
 		
 		await pleaseWait;
@@ -59,6 +70,14 @@ $(document).ready(function(){
 
 			zIndex++;
 
+			if( where == "right" ) {
+				gameBoard.board.rightCard = [ cardShape , cardNumber ] ;
+			} else if ( where == "top" ) {
+				gameBoard.board.topCard = [ cardShape , cardNumber ] ;
+			} else if ( where == "left" ) {
+				gameBoard.board.leftCard = [ cardShape , cardNumber ] ;
+			}
+
 			drawSeperateCard(cardNumber, cardShape);
 
 			let cards = $(`.player_${whichPlayer}`).last();
@@ -68,7 +87,7 @@ $(document).ready(function(){
 
 			cards.remove();
 			playAudio();
-			console.log(cards);
+			//console.log(cards);
 		}
 
 		sortMyDeckOfCards() {
@@ -115,6 +134,8 @@ $(document).ready(function(){
 	class Game {
 		constructor() {
 			this.players = [];
+			this.yourScore = 0;
+			this.opponentScore = 0;
 		}
 	
 		drawCards = (deck) => {
@@ -227,8 +248,40 @@ $(document).ready(function(){
 	let verifyNumberAndShape = (number, shape) => {
 		return true;
 	}
-	
 
+
+	let myScoreContainer = document.getElementById('yourScoreContainer');
+	let rightScoreContainer = document.getElementById('rightScoreContainer');
+
+	let createScoreCard = ( whichPlayer , score) => {
+		let scoreCardHTML = `
+		<div class="otherCard ${ whichPlayer == 0 ? `scoreCard` : `scoreCardForOthers`}">
+			<div class="greenBack">
+				<div class="insideGreenScore">
+					<div class="insideSpadesScore">
+						<span>${score}</span>
+					</div>
+				</div>
+			</div>
+		</div>
+		`;
+
+		if( whichPlayer == 0 ) {
+			myScoreContainer.innerHTML += scoreCardHTML;
+		} else {
+			rightScoreContainer.innerHTML += scoreCardHTML;
+		}
+		
+		
+	}
+
+	/*
+	createScoreCard(0,0);
+	createScoreCard(1,0);
+	$('div.playerRight').css('right','-70px');
+	$('div.playerRight').css('bottom','50%');
+	*/
+	
 	let createAndAddCard = (whichPlayer) => {
 		drawCard(number, shape , whichPlayer);
 		game.players[whichPlayer].counter++;
@@ -510,6 +563,8 @@ $(document).ready(function(){
 					resolve(cleangameBoard());
 			} , delay );
 		});
+
+		gameBoard.board = {};
 		
 		await clearPromise;
 	}
@@ -531,6 +586,8 @@ $(document).ready(function(){
 		let cardNumber = split[0];
 		let cardShape = split[1];
 
+		//board.topCard = [ cardShape , cardNumber ]
+		gameBoard.board.downCard = [ cardShape , cardNumber ] ;
 		drawSeperateCard(cardNumber, cardShape);
 
 
@@ -547,8 +604,8 @@ $(document).ready(function(){
 		changeWidthBasedOnNumberOfCards(0);
 
 
-		board.down = compareID;
-		console.log(board);
+		//board.down = compareID;
+		//console.log(board);
 
 		game.players[0].cards = game.players[0].cards.filter( (value) => {
 			return value != compareID;
@@ -576,6 +633,9 @@ $(document).ready(function(){
 		await rightTurn();
 		await topTurn();
 		await leftTurn();
+
+		gameBoard.checkBoardForScore();
+
 		await clearBoard();
 	});
 

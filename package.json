@@ -1,0 +1,23 @@
+{
+  "name": "hokm-card-game",
+  "version": "1.0.0",
+  "description": "hokm card game",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sajjadabd/hokm-card-game.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sajjadabd/hokm-card-game/issues"
+  },
+  "homepage": "https://github.com/sajjadabd/hokm-card-game#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
